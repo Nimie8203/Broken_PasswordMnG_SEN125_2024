@@ -5,13 +5,9 @@ import java.security.SecureRandom;
 public class Generator {
 
 	private static final String ALL_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:,.<>?";
-	private SecureRandom random;
+	private static SecureRandom random = new SecureRandom();
 
-	private void randomNumberGenerator() {
-        random = new SecureRandom();
-    }
-
-	private String generatePassword(int length) {
+	private static String generatePassword(int length) {
 		String password = "";
 		if (length <= 0) {
 			System.out.println("Length must be greater than 0.");
@@ -25,8 +21,7 @@ public class Generator {
 	}
 	
 	public static void deliverPassword() {
-		Generator generator = new Generator();
-        String myPassword = generator.generatePassword(12);
+        String myPassword = Generator.generatePassword(12);
         System.out.println("Generated Password: " + myPassword);
 	}
 }

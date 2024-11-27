@@ -1,7 +1,5 @@
 package pack1;
 
-import java.util.*;
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -12,7 +10,7 @@ public class Main {
 		Storage storage = new Storage();
 		Generator generator = new Generator();
 
-		Scanner scanner = new Scanner(System.in);
+		
 
 		String userInputS;
 		int userInput = 9;
@@ -21,7 +19,7 @@ public class Main {
 
 			Interfaces.drawInterface();
 
-			userInput = scanner.nextInt();
+			userInput = Interfaces.scanner.nextInt();
 
 			switch (userInput) {
 			case 1:
@@ -29,6 +27,8 @@ public class Main {
 				break;
 			case 2:
 				Interfaces.drawGenerator();
+				break;
+			case 0: 
 				break;
 			default:
 				System.out.println("\nInvalid Input!");
