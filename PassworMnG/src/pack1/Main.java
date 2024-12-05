@@ -9,7 +9,6 @@ public class Main {
 		Encryptor encryptor = new Encryptor();
 		Storage storage = new Storage();
 		Generator generator = new Generator();
-
 		
 
 		String userInputS;
@@ -23,7 +22,13 @@ public class Main {
 
 			switch (userInput) {
 			case 1:
-				Interfaces.drawManager();
+				if(authenticator.userId == "0") {
+					Interfaces.drawAuthenticator();
+				}
+				else {
+					Interfaces.drawManager();
+				}
+				
 				break;
 			case 2:
 				Interfaces.drawGenerator();
