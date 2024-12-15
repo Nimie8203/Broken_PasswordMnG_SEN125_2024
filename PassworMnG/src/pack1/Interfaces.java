@@ -9,17 +9,20 @@ public class Interfaces {
 
 	public static void drawInterface() {
 
-		System.out.print("____________________\n"
-					   + "/// Password M&G \\\\\\\n\n"
-					   + "1- Manager\n"
-					   + "2- Generator\n\n"
-					   + "0- Exit"
-					   + "\n\nInput: ");
-
+		System.out.println("=====================================");
+        System.out.println(">>       PASSWORD M&G MENU         <<");
+        System.out.println("=====================================");
+        System.out.println("->  1. Manager");
+        System.out.println("->  2. Generator");
+        System.out.println("->  0. Exit");
+        System.out.println("=====================================");
+        System.out.print("Select an option: ");
 	}
 
 	public static void exitPrompt() {
-		System.out.println("######\nExited");
+		System.out.println("Exiting the program.");
+        scanner.close(); 
+        System.exit(0);
 	}
 	
 	public static void drawAuthenticator() {
