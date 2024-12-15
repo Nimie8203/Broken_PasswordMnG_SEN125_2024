@@ -1,27 +1,37 @@
 package pack1;
 
-import java.security.SecureRandom;
+import java.util.Random;
 
 public class Generator {
 
-	private static final String ALL_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:,.<>?";
-	private static SecureRandom random = new SecureRandom();
+    public String generatePassword(int length, boolean includeUppercase, boolean includeDigits, boolean includeSpecial) {
+        String lowerCase = "abcdefghijklmnopqrstuvwxyz";
+        String upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String digits = "0123456789";
+        String special = "!@#$%^&*()-_=+<>?/";
 
-	private static String generatePassword(int length) {
-		String password = "";
-		if (length <= 0) {
-			System.out.println("Length must be greater than 0.");
-			return "";
-		}
-		for (int i = 0; i < length; i++) {
-			int index = random.nextInt(ALL_CHARACTERS.length());
-			password += ALL_CHARACTERS.charAt(index);
-		}
-		return password;
-	}
-	
-	public static void deliverPassword() {
-        String myPassword = Generator.generatePassword(12);
-        System.out.println("Generated Password: " + myPassword);
-	}
+        StringBuilder characterPool = new StringBuilder(lowerCase);
+        if (includeUppercase) {
+            characterPool.append(upperCase);
+        }
+        if (includeDigits) {
+            characterPool.append(digits);
+        }
+        if (includeSpecial) {
+            characterPool.append(special);
+        }
+
+        if (characterPool.length() == 0) {
+            throw new IllegalArgumentException("No character sets selected for password generation.");
+        }
+
+        Random random = new Random();
+        StringBuilder password = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characterPool.length());
+            password.append(characterPool.charAt(index));
+        }
+
+        return password.toString();
+    }
 }

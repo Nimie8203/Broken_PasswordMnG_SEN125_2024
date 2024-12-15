@@ -1,47 +1,47 @@
 package pack1;
 
 public class Main {
+    public static void main(String[] args) {
+        Interfaces interfaces = new Interfaces();
+        Authenticator authenticator = new Authenticator();
+        Generator generator = new Generator();
+        Storage storage = new Storage();
 
-	public static void main(String[] args) {
+        int userInput = -1;
 
-		Interfaces interfaces = new Interfaces();
-		Authenticator authenticator = new Authenticator();
-		Encryptor encryptor = new Encryptor();
-		Storage storage = new Storage();
-		Generator generator = new Generator();
-		
+        while (userInput != 0) {
+            interfaces.drawMainMenu();
+            userInput = interfaces.getUserInput();
 
-		String userInputS;
-		int userInput = 9;
+            switch (userInput) {
+                case 1: // Manager
+                    if (authenticator.isFirstTime()) {
+                        System.out.print("Set up a new PIN: ");
+                        String newPin = interfaces.getUserString();
+                        authenticator.setupPin(newPin);
+                        System.out.println("PIN setup successfully!");
+                    } else {
+                        System.out.print("Enter PIN: ");
+                        String enteredPin = interfaces.getUserString();
+                        if (authenticator.authenticate(enteredPin)) {
+                            interfaces.drawManagerMenu(storage);
+                        } else {
+                            System.out.println("Authentication failed!");
+                        }
+                    }
+                    break;
 
-		while (userInput != 0) {
+                case 2: // Password Generator
+                    interfaces.drawGenerator(generator, storage);
+                    break;
 
-			Interfaces.drawInterface();
+                case 0: // Exit
+                    interfaces.exitPrompt();
+                    break;
 
-			userInput = Interfaces.scanner.nextInt();
-
-			switch (userInput) {
-			case 1:
-				if(authenticator.userId == "0") {
-					Interfaces.drawAuthenticator();
-				}
-				else {
-					Interfaces.drawManager();
-				}
-				
-				break;
-			case 2:
-				Interfaces.drawGenerator();
-				break;
-			case 0: 
-				break;
-			default:
-				System.out.println("\nInvalid Input!");
-			}
-
-		}
-		Interfaces.exitPrompt();
-
-	}
-
+                default:
+                    System.out.println("\nInvalid Input!");
+            }
+        }
+    }
 }
